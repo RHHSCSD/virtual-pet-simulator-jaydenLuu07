@@ -4,7 +4,6 @@
  */
 package virtualpet;
 import java.util.*;
-import java.util.Scanner;
 /**
  *
  * @author michael.roy-diclemen
@@ -88,13 +87,35 @@ public class VirtualPet {
         System.out.println("/n1. Enter your own pet name\n2. Generate a random pet name");
         System.out.print("\nChoose an option: ");
         int nameDecision = keyboard.nextInt();
+        
+        Random rand = new Random();
+        
+        int nameLength = rand.nextInt(6)+4;
+        
         String petName = "";
+        char randomCharacter = '';
+        String randomLetter = "";
+        boolean vowel = false;
+        
         if (nameDecision==1){
             System.out.print("Enter pet name: ");
             petName = keyboard.nextLine();
         }
         else if (nameDecision==2){
-            
+            randomCharacter = (char) (65+rand.nextInt(26));
+            switch (randomCharacter){
+                case 'A':
+                case 'E':
+                case 'I':
+                case 'O':
+                case 'U':
+                    vowel = true;
+            }
+            randomLetter = ""+randomCharacter;
+            petName = petName+""+randomLetter;
+            for(int i = 1;i<nameLength;i++){
+                
+            }
         }
         System.out.println("Your pet, named "+petName+", has been born!");
         
