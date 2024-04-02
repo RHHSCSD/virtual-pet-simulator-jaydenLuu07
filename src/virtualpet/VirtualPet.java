@@ -33,6 +33,8 @@ public class VirtualPet {
         String password = keyboard.nextLine();
         
         //Determing if the inputted information is correct
+        //OLD CODE
+        /*
         if (username.equals(USERNAME)){
             System.out.println("Correct!");
         }
@@ -46,6 +48,17 @@ public class VirtualPet {
         else{
             System.out.println("Wrong password, exiting program");
             System.exit(0);
+        }
+        */
+        //NEW CODE
+        for (int i = 0;i<3;i++){
+            if (username.equals(USERNAME)){
+                System.out.println("Correct!");
+                i=3;
+            }
+            else{
+                System.out.println("Wrong password, "+(2-i)+" tries left");
+            }
         }
         
         //Part 2 - Decision Structures -------------------------------------------------------------------------
@@ -84,6 +97,7 @@ public class VirtualPet {
         System.out.println("Are you sure you want to pick the "+chosenPet+"? (Y/N) ");
         
         //Part 4 - Generating pet names -------------------------------------------------------------------------------------------
+        /*
         System.out.println("/n1. Enter your own pet name\n2. Generate a random pet name");
         System.out.print("\nChoose an option: ");
         int nameDecision = keyboard.nextInt();
@@ -118,6 +132,9 @@ public class VirtualPet {
             }
         }
         System.out.println("Your pet, named "+petName+", has been born!");
+        */
+        
+        //Part 5 -------------------------------------------------------------------
         
         keyboard.close();
     }
