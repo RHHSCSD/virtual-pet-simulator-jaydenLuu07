@@ -57,7 +57,11 @@ public class VirtualPet {
                 i=3;
             }
             else{
-                System.out.println("Wrong password, "+(2-i)+" tries left");
+                System.out.println("Wrong password, "+(2-i)+" tries left.");
+            }
+            if (i==2){
+                System.out.println("Exiting program...");
+                System.exit(0);
             }
         }
         
@@ -65,7 +69,11 @@ public class VirtualPet {
         System.out.println("\n1. Start\n2. Instructions\n3. Exit");
         System.out.print("\nChoose an option: ");
         String option = keyboard.nextLine();
+        boolean optionPicked = false;
+        
         //Reading the input of the user on the starting screen
+        //OLD CODE
+        /*
         switch(option){
             //If user chose the instructions option
             case "2":
@@ -84,6 +92,29 @@ public class VirtualPet {
             //If user cannot read
             default: System.out.print("Only people cursed with literacy are allowed to use this program."); System.exit(0);
         }
+        */
+        //NEW CODE
+        while (optionPicked==false){
+            switch(option){
+                //If user chose the instructions option
+                case "2":
+                case "Instructions":
+                    System.out.println("Instructions have not been made, the program will now start.\n");
+                    optionPicked = true;
+                //If user chose the exit option
+                case "3":
+                case "Exit":
+                    System.out.println("All right then!");
+                    System.exit(0);
+                //If user chose the start option
+                case "1":
+                case "Start":
+                    System.out.println("Starting the program...\n");
+                    optionPicked = true;
+                //If user cannot read
+                default: System.out.print("Only people cursed with literacy are allowed to use this program."); System.exit(0);
+            }
+        }
         
         //Displaying the 3 possible pets
         System.out.println("        __\n   (___()'`;\n   /,    /`\n   \\\\\"--\\\\");
@@ -97,7 +128,7 @@ public class VirtualPet {
         System.out.println("Are you sure you want to pick the "+chosenPet+"? (Y/N) ");
         
         //Part 4 - Generating pet names -------------------------------------------------------------------------------------------
-        /*
+        
         System.out.println("/n1. Enter your own pet name\n2. Generate a random pet name");
         System.out.print("\nChoose an option: ");
         int nameDecision = keyboard.nextInt();
@@ -107,7 +138,7 @@ public class VirtualPet {
         int nameLength = rand.nextInt(6)+4;
         
         String petName = "";
-        char randomCharacter = '';
+        char randomCharacter = 'a';
         String randomLetter = "";
         boolean vowel = false;
         
@@ -128,15 +159,15 @@ public class VirtualPet {
             randomLetter = ""+randomCharacter;
             petName = petName+""+randomLetter;
             for(int i = 1;i<nameLength;i++){
-                
+                if (vowel==true){
+                    
+                }
+               
             }
         }
         System.out.println("Your pet, named "+petName+", has been born!");
-        */
         
-        //Part 5 -------------------------------------------------------------------
         
         keyboard.close();
-    }
-    
+    }  
 }
