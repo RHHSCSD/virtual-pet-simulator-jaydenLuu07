@@ -52,7 +52,7 @@ public class VirtualPet {
             System.exit(0);
         }
         */
-        //NEW CODE
+        //NEW CODE - Part 5A --------------------------------------------------
         for (int i = 0;i<3;i++){
             //Getting user input
             System.out.print("\nEnter your username: ");
@@ -102,7 +102,7 @@ public class VirtualPet {
             default: System.out.print("Only people cursed with literacy are allowed to use this program."); System.exit(0);
         }
         */
-        //NEW CODE
+        //NEW CODE - Part 5A ----------------------------------------------------------------
         while (optionPicked==false){
             switch(option){
                 //If user chose the instructions option
@@ -121,7 +121,7 @@ public class VirtualPet {
                     System.out.println("Starting the program...\n");
                     optionPicked = true; break;
                 //If user cannot read
-                default: System.out.print("Only people cursed with literacy are allowed to use this program."); System.exit(0);
+                default: System.out.print("Please enter a valid input,"); break;
             }
         }
         
@@ -243,6 +243,20 @@ public class VirtualPet {
         int health = MINSTAT + (rand.nextInt(MAXSTAT-MINSTAT));
         int food = MINSTAT + (rand.nextInt(MAXSTAT-MINSTAT));
         int energy = MINSTAT + (rand.nextInt(MAXSTAT-MINSTAT));
+        
+        //Displaying the stats
+        System.out.println("\nHealth: "+health);
+        System.out.println("Food: "+food);
+        System.out.println("Energy: "+energy);
+        
+        //Part 5B (Minigames) -----------------------------------------------------------------------------------------------
+        
+        //Choosing a game
+        while
+        
+        //First game - Hangman 
+        
+        
         
         keyboard.close();
     }  
