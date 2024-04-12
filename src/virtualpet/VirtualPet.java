@@ -252,9 +252,65 @@ public class VirtualPet {
         //Part 5B (Minigames) -----------------------------------------------------------------------------------------------
         
         //Choosing a game
-        while
+        boolean hasGameBeenChosen = false;
+        System.out.println("\n1. Hangman\n2. Matching Game");
+        System.out.print("\nChoose a minigame to play (1/2): ");
         
+        //Intializing variables for this section
+        int gameChosen = 0;
+        int wallet = 0;
+        
+        while(hasGameBeenChosen==false){
+            gameChosen = keyboard.nextInt();
+            if (gameChosen==1||gameChosen==2){
+                hasGameBeenChosen = true;
+            }
+            else{
+                System.out.println("Please input either 1 or 2 to choose a game.");
+            }
+        }
         //First game - Hangman 
+        if (gameChosen ==1){
+            
+            //Because we haven't learned arrays, it's very bulky to hold multiple words.  I'll just have this one word as the "word of the day"
+            String wordOfTheDay = "retaliate";
+            boolean wordGuessed = false;
+            int mistakesLeft = 6;
+            String guess = "";
+            String userGuesses = "";
+            
+            //Determinin the length of the word of the day, making it so that it has that many blanks
+            String discoveredLetters = "";
+            for (int i=1; i<wordOfTheDay.length();i++){
+                discoveredLetters = discoveredLetters + "_";
+            }
+            
+            //Starts the game loop
+            while (wordGuessed==false){
+                System.out.print("Guess a letter or try to guess the entire word: ");
+                guess = keyboard.next();
+                //If user guessed a letter
+                if (guess.length()==1){
+                    //Making sure that the user did not guess the same word twice
+                    for (int j = 0;)
+                        for (int i=0;i<wordOfTheDay.length()-1;i++){
+                            //Replacing the blanks on the discovered word with the actual letters
+                            if(guess.equals(wordOfTheDay.substring(i,i+1))){
+                                //Covering cases
+                                if (i==0){
+                                    discoveredLetters = guess+discoveredLetters.substring(1);
+                                }
+                                else if (i==wordOfTheDay.length()-1){
+                                    discoveredLetters = discoveredLetters.substring(0,i)+guess;
+                                }
+                            }
+                        }
+                }
+                
+            }
+        }
+        
+        
         
         
         
