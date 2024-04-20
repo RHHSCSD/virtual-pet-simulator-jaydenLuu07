@@ -138,7 +138,7 @@ public class VirtualPet {
         while (petChosen.equals("N")){
             System.out.print("\nChoose a pet: ");
             String chosenPet = keyboard.nextLine();
-            System.out.println("Are you sure you want to pick the "+chosenPet+"? (Y/N) ");
+            System.out.print("Are you sure you want to pick the "+chosenPet+"? (Y/N) ");
             petChosen = keyboard.nextLine();
             
             //If user does not put in proper input
@@ -272,39 +272,93 @@ public class VirtualPet {
         //First game - Hangman 
         if (gameChosen ==1){
             
-            //Because we haven't learned arrays, it's very bulky to hold multiple words.  I'll just have this one word as the "word of the day"
+            //Because we haven't learned arrays or files, it's very bulky to hold multiple words.  I'll just have this one word as the "word of the day"
             String wordOfTheDay = "retaliate";
+            
+            //Initializing variables for this section
             boolean wordGuessed = false;
-            int mistakesLeft = 6;
             String guess = "";
-            String userGuesses = "";
+            String userGuesses = " ";
+            boolean repeatedGuess = false;
+            boolean correctGuess = false;
+            
+            //Number of guesses
+            int mistakesLeft = 6;
             
             //Determinin the length of the word of the day, making it so that it has that many blanks
             String discoveredLetters = "";
-            for (int i=1; i<wordOfTheDay.length();i++){
+            for (int i=1; i<=wordOfTheDay.length();i++){
                 discoveredLetters = discoveredLetters + "_";
             }
             
             //Starts the game loop
             while (wordGuessed==false){
-                System.out.print("Guess a letter or try to guess the entire word: ");
+                System.out.print("\nGuess a letter or try to guess the entire word: ");
                 guess = keyboard.next();
+                //Resets boolean variables
+                repeatedGuess=false;
+                correctGuess = false;
+                
                 //If user guessed a letter
                 if (guess.length()==1){
-                    //Making sure that the user did not guess the same word twice
-                    for (int j = 0;)
-                        for (int i=0;i<wordOfTheDay.length()-1;i++){
+                    //Making sure that the user did not guess the same letter twice
+                    for (int j = 0;j<userGuesses.length();j++){
+                        if (guess.equals(userGuesses.substring(j,j+1))){ 
+                            repeatedGuess = true;
+                        }
+                    }
+                    if (repeatedGuess==false){
+                        //Adds user's guess 
+                        userGuesses = userGuesses+guess;
+                        
+                        for (int i=0;i<wordOfTheDay.length();i++){
                             //Replacing the blanks on the discovered word with the actual letters
                             if(guess.equals(wordOfTheDay.substring(i,i+1))){
                                 //Covering cases
                                 if (i==0){
                                     discoveredLetters = guess+discoveredLetters.substring(1);
                                 }
-                                else if (i==wordOfTheDay.length()-1){
+                                else if (i==(wordOfTheDay.length()-1)){
                                     discoveredLetters = discoveredLetters.substring(0,i)+guess;
                                 }
-                            }
+                                else{
+                                    discoveredLetters = discoveredLetters.substring(0,i)+guess+discoveredLetters.substring(i+1,wordOfTheDay.length());
+                                }
+                                correctGuess = true;
+                            }   
                         }
+                        //What happens if the user does not guess a letter in the word
+                        if (correctGuess==false){
+                            System.out.println("That letter is not in the word.");
+                            mistakesLeft--;
+                            System.out.println("Mistakes left: "+mistakesLeft);
+                        }
+                        //Prints out what the user has guessed so far
+                        System.out.println(discoveredLetters);
+                    }
+                    //Prints out repeated guess message
+                    else{
+                        System.out.println("You've already guessed that letter.");
+                    }
+                    //Keeps track and prints out user guesses
+                    System.out.println("Your guesse(s) are"+userGuesses);
+                }
+                //What happens if the user tries the guess the entire word
+                else{
+                    if (guess.equals(wordOfTheDay)){
+                        System.out.println("Correct!  The word was "+wordOfTheDay);
+                        wordGuessed = true;
+                    }
+                    else{
+                        System.out.println("Sorry, the word is not "+guess);
+                        mistakesLeft--;
+                        System.out.println("Mistakes left: "+mistakesLeft);
+                    }
+                }
+                //If user has ran out of mistakes
+                if (mistakesLeft==0){
+                    System.out.println("You have ran out of mistakes.  The word was "+wordOfTheDay);
+                    wordGuessed = true;
                 }
                 
             }
