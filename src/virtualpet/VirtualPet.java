@@ -176,7 +176,7 @@ public class VirtualPet {
         else if (nameDecision==2){
             
             //Generates capital letter
-            randomCharacter = (char) (65+rand.nextInt(26));
+            randomCharacter = (char) ('A'+rand.nextInt(26));
             switch (randomCharacter){
                 case 'A':
                 case 'E':
@@ -189,8 +189,14 @@ public class VirtualPet {
             petName = petName+randomLetter;
             
             //Generates the rest of the letters, depending on if the previous letter was a vowel
-            for(int i = 1;i<nameLength;i++){
-                if (vowel==true){
+            for(int i = 1;i<=nameLength;i++){
+                //Determining if the next letter is the same as the last
+                randomNumber = rand.nextInt(10);
+                //Includes the i not being equal to 1 so that there are not 2 capital letters
+                if ((randomNumber==0)&&(i!=1)){
+                    randomLetter = petName.substring(i);
+                }
+                else if (vowel==true){
                     while(vowel==true){
                         randomCharacter = (char) ('a'+rand.nextInt(26));
                         switch (randomCharacter){
@@ -219,14 +225,6 @@ public class VirtualPet {
                     }
                 }
                 randomLetter = ""+randomCharacter;
-                
-                //Determining if the next letter is the same as the last
-                randomNumber = rand.nextInt(10);
-                //Includes the i not being equal to 1 so that there are not 2 capital letters
-                if ((randomNumber==0)&&(i!=1)){
-                    randomLetter = petName.substring(i);
-                }
-                
                 petName = petName+randomLetter;
             }
         }
@@ -290,6 +288,9 @@ public class VirtualPet {
             for (int i=1; i<=wordOfTheDay.length();i++){
                 discoveredLetters = discoveredLetters + "_";
             }
+            
+            //Introduces the game
+            System.out.println("Welcome to hangman!  The goal of the game is to guess the mystery word with as few mistakes as possible.");
             
             //Starts the game loop
             while (wordGuessed==false){
@@ -362,11 +363,51 @@ public class VirtualPet {
                 }
                 
             }
+            //Giving the user their prize money
+            wallet = wallet+(mistakesLeft*3);
+            
         }
-        
-        
-        
-        
+        //Second Game chosen - Number Guessing Game (I gave up making the matching game, besides I think that hangman is similar enough in complexity and I'm tired and I have 3 tests to study and I'm rambling for too long)
+        else if(gameChosen==2){
+            //Generating the mystery number
+            int mysteryNumber = rand.nextInt(100)+1;
+            
+            //Initializing variables
+            boolean numberGuessed = false;
+            int guess = 0;
+            int totalGuesses = 0;
+            
+            //Explaing the game
+            System.out.println("Welcome to the number guessing game!  Choose a number between 1 - 100 and I will tell you whether your guess is higher or lower than the mystery number!");
+            
+            //Gameplay loop
+            while(numberGuessed == false){
+                System.out.print("\nChoose a number: ");
+                guess = keyboard.nextInt();
+                
+                //If user guesses the number
+                if (guess==mysteryNumber){
+                    numberGuessed=true;
+                    System.out.println("Congratulations!  The number was indeed "+mysteryNumber);
+                }
+                //If the user guesses higher
+                else if(guess>mysteryNumber){
+                    System.out.println("Your guess is higher than the mystery number");
+                    totalGuesses++;
+                }
+                //If the user guesses lower
+                else if(guess<mysteryNumber){
+                    System.out.println("Your guess is lower than the mystery number");
+                    totalGuesses++;
+                }
+                //Tells the user how many guesses they have
+                System.out.println("Your total guesses amount to "+totalGuesses);
+            }
+            //Giving the user their prize money
+            if(totalGuesses<=15){
+                wallet = wallet+15-totalGuesses;
+            }
+        }
         
         keyboard.close();
     }  
